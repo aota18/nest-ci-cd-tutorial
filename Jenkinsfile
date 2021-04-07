@@ -88,7 +88,7 @@ pipeline {
             echo 'Deploy Backend'
 
             sh 'docker ps -f name=backend -q | xargs --no-run-if-empty docker container stop'
-            sh 'docker container ls -a -fname=frontend -q | xargs -r docker container rm'
+            sh 'docker container ls -a -fname=backend -q | xargs -r docker container rm'
             sh 'docker images --notrunc --all --quiet --filter="dangling=true" | xargs --no-run-if-empty docker rmi'
             sh 'docker run -p 3000:3000 -d --name backend backend'
         }
