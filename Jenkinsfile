@@ -16,7 +16,10 @@ pipeline {
         HOME = '.' // Avoid npm root owned
     }
 
-    stages('Prepare'){
+    stages{
+
+    
+    stage('Prepare'){
         agent any
 
         steps {
@@ -47,7 +50,7 @@ pipeline {
     }
 
 
-    stages('Build Backend'){
+    stage('Build Backend'){
         agent {
             docker {
                 image 'node:latest'
@@ -68,7 +71,7 @@ pipeline {
         }
     }
 
-    stages('Build Docker'){
+    stage('Build Docker'){
         agent any
 
         steps {
@@ -78,7 +81,7 @@ pipeline {
         }
     }
 
-    stages('Deploy Backend'){
+    stage('Deploy Backend'){
         agent any 
 
         steps {
@@ -97,5 +100,7 @@ pipeline {
                         body: 'Backend Successfully deployed!'
             }
         }
+    }
+
     }
 }
